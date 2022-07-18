@@ -1,3 +1,4 @@
+// Online C compiler to run C program online
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -46,6 +47,43 @@ void rec_reverse_node(struct node *q, struct node *p) {
         }
 }
 
+void rec_reverse_node1(struct node *p) {
+      if (!p || !p->next)     {
+          head = p;
+          return;
+      }
+      rec_reverse_node1(p->next);
+      struct node *temp = p;
+      temp->next->next = temp;
+      temp->next = NULL;
+}
+
+void del_node(int pos, struct node *p){
+    if (!p) {
+        return;
+    }
+    struct node *t;
+    while(pos-1) {
+        t = p;
+        p = p->next;
+        pos--;
+    }
+    t->next = t->next->next;
+}
+
+void del_node_without_head(struct node *p){
+    if (!p) {
+        return;
+    }
+    struct node *t;
+    while(pos-1) {
+        t = p;
+        p = p->next;
+        pos--;
+    }
+    t->next = t->next->next;
+}
+
 //1->2->3->4->null
 int main() {
     head = create_node(1);
@@ -58,5 +96,11 @@ int main() {
     print_node(head);
     rec_reverse_node(NULL, head);
     print_node(head);
+    rec_reverse_node1(head);
+    print_node(head);    
+    del_node(2, head);
+    print_node(head);
+    del_node1(2);
+    print_node(head);     
     return 0;
 }
